@@ -134,7 +134,7 @@ const Navigation = () => {
               iconSource: MaterialIcons,
             },
             {
-              href: 'logout',
+              href: '/logout',
               icon: 'logout',
               text: 'Logout',
               iconSource: MaterialIcons,
@@ -142,13 +142,13 @@ const Navigation = () => {
           ]
         : [
             {
-              href: 'sign-in',
+              href: '/sign-in',
               icon: 'login',
               text: 'Login',
               iconSource: MaterialIcons,
             },
             {
-              href: 'register',
+              href: '/register',
               icon: 'person-add',
               text: 'Register',
               iconSource: MaterialIcons,
@@ -160,7 +160,7 @@ const Navigation = () => {
 
   const navigateTo = useCallback(
     (href) => {
-      if (href === 'logout') {
+      if (href === '/logout') {
         dispatch(signOut());
         sessionSignOut();
       } else {
@@ -207,6 +207,7 @@ const Navigation = () => {
       const isSelected = selectedNavItem === href; // check if the item is selected
 
       const handleItemPress = () => {
+        console.log('Item Ref' + href);
         setSelectedNavItem(href);
         navigateTo(href);
       };
