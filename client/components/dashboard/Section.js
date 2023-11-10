@@ -24,7 +24,7 @@ const loadStyles = (theme) => {
     card: {
       justifyContent: 'center',
       alignItems: 'center',
-      paddingHorizontal: 10,
+      paddingHorizontal: 30,
       paddingVertical: 20,
       backgroundColor: currentTheme.colors.secondaryBlue,
     },

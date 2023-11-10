@@ -45,6 +45,7 @@ import useTheme from '../../hooks/useTheme';
 import { ChevronRight, Cloud, Moon, Star, Sun } from '@tamagui/lucide-icons';
 import { ListItem, Separator, XStack, YGroup } from 'tamagui';
 import { useSession, useProtectedRoute } from '../../context/auth';
+import Header from '../../components/app-header';
 
 export default function AppLayout() {
   const {
@@ -74,22 +75,23 @@ export default function AppLayout() {
   };
 
   const hiddenTabs = [
-    'about/index',
-    'feed/index',
-    'items/index',
-    'trip/[tripId]',
-    'trip/create',
-    'pack/create',
-    'pack/[packId]',
-    'destination/[destinationId]',
-    'packs/index',
-    'drawer/index',
-    'profile/[id]',
-    'profile/settings/index',
-    'appearance/index',
-    'maps/index',
-    'map/index',
-    'password-reset/index',
+    { name: 'about/index', header: () => <View /> },
+    { name: 'feed/index', header: () => <View /> },
+    { name: 'items/index', header: () => <View /> },
+    { name: 'trip/[tripId]', header: () => <View /> },
+    { name: 'trip/create', header: () => <View /> },
+    { name: 'pack/create', header: () => <View /> },
+    { name: 'pack/[packId]', header: () => <View /> },
+    { name: 'destination/[destinationId]', header: () => <View /> },
+    { name: 'packs/index', header: () => <View /> },
+    { name: 'drawer/index', header: () => <View /> },
+    { name: 'filter/index', header: () => <View /> },
+    { name: 'profile/[id]', header: () => <View /> },
+    { name: 'profile/settings/index', header: () => <View /> },
+    { name: 'appearance/index', header: () => <View /> },
+    { name: 'maps/index', header: () => <View /> },
+    { name: 'map/index', header: () => <View /> },
+    { name: 'password-reset/index', header: () => <View /> },
   ];
 
   const staticNavigationItems = useMemo(
@@ -201,6 +203,7 @@ export default function AppLayout() {
           options={{
             href: '/home',
             title: 'PACKRAT',
+            header: () => <Header />,
             tabBarLabel: 'HOME',
             tabBarIcon: ({ color }) => (
               <View style={styles.tabIcon}>
@@ -289,14 +292,15 @@ export default function AppLayout() {
             ),
           }}
         />
-        {hiddenTabs.map((name) => (
+        {hiddenTabs.map((route) => (
           <Tabs.Screen
-            key={name}
+            key={route.name}
             // Name of the route to hide.
-            name={name}
+            name={route.name}
             options={{
               // This tab will no longer show up in the tab bar.
               href: null,
+              header: () => null,
             }}
           />
         ))}

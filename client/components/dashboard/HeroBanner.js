@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, VStack, Text, Image } from 'native-base';
 import LargeCard from '../card/LargeCard';
 import { SearchInput } from '../SearchInput';
@@ -16,7 +16,7 @@ import {
 import { hexToRGBA } from '../../utils/colorFunctions';
 import useCustomStyles from '~/hooks/useCustomStyles';
 
-const HeroSection = ({ onSelect }) => {
+const HeroSection = ({ onSelect, componentId }) => {
   const dispatch = useDispatch();
   const { enableDarkMode, enableLightMode, isDark, isLight, currentTheme } =
     useTheme();
@@ -77,6 +77,10 @@ const HeroSection = ({ onSelect }) => {
       : "Let's find a new trail";
 
   // console.log("cardBackgroundColor", cardBackgroundColor)
+
+  useEffect(() => {
+    console.log('<+++++++++++++componentId++++++++++++>' + componentId);
+  }, []);
 
   return (
     <View style={styles.banner}>
