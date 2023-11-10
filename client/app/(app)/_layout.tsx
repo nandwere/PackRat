@@ -188,7 +188,6 @@ export default function AppLayout() {
   // useEffect(() => {}, []);
   const navigationItems = [...staticNavigationItems, ...userNavigationItems];
   useProtectedRoute(session);
-  // return Platform.OS === 'web' ? <Stack /> : <Slot />;
   return Platform.OS === 'web' ? (
     <Stack />
   ) : (
@@ -202,8 +201,7 @@ export default function AppLayout() {
           name="home/index"
           options={{
             href: '/home',
-            title: 'PACKRAT',
-            header: () => <Header />,
+            header: () => <Header title="PACKRAT" />,
             tabBarLabel: 'HOME',
             tabBarIcon: ({ color }) => (
               <View style={styles.tabIcon}>

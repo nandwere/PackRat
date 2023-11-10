@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, VStack, Text, Image } from 'native-base';
 import LargeCard from '../card/LargeCard';
 import { SearchInput } from '../SearchInput';
-import { View } from 'react-native';
-import { theme } from '../../theme';
+import { SafeAreaView, View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
 import Hero from '../hero';
@@ -16,7 +15,7 @@ import {
 import { hexToRGBA } from '../../utils/colorFunctions';
 import useCustomStyles from '~/hooks/useCustomStyles';
 
-const HeroSection = ({ onSelect, componentId }) => {
+const HeroSection = ({ onSelect, onSearchFocus, onSearch }) => {
   const dispatch = useDispatch();
   const { enableDarkMode, enableLightMode, isDark, isLight, currentTheme } =
     useTheme();
@@ -78,10 +77,6 @@ const HeroSection = ({ onSelect, componentId }) => {
 
   // console.log("cardBackgroundColor", cardBackgroundColor)
 
-  useEffect(() => {
-    console.log('<+++++++++++++componentId++++++++++++>' + componentId);
-  }, []);
-
   return (
     <View style={styles.banner}>
       <Hero
@@ -114,6 +109,8 @@ const HeroSection = ({ onSelect, componentId }) => {
             <SearchInput
               onSelect={handleSearchSelect}
               placeholder={'Search by park, city, or trail'}
+              onSearchFocus={onSearchFocus}
+              onSearch={onSearch}
             />
           </VStack>
         </LargeCard>

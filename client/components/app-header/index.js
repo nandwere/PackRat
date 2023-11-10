@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'; // You may need to ins
 import SVGLogoComponent from '../logo';
 import useCustomStyles from '~/hooks/useCustomStyles';
 
-const Header = () => {
+const Header = ({ title }) => {
   const router = useRouter();
   const styles = useCustomStyles(loadStyles);
   return (
@@ -25,14 +25,8 @@ const Header = () => {
           fill="#fff"
         />
 
-        <Text style={styles.text}>PackRat</Text>
-
-        <TouchableOpacity
-          style={styles.searchIcon}
-          onPress={() => router.push('/filter')}
-        >
-          <Icon name="search" size={24} color="#000" />
-        </TouchableOpacity>
+        <Text style={styles.text}>{title || 'PackRat'}</Text>
+        <View />
       </View>
     </SafeAreaView>
   );
