@@ -25,7 +25,7 @@ import {
 import { fetchWeather, fetchWeatherWeek } from '../store/weatherStore';
 import useCustomStyles from '~/hooks/useCustomStyles';
 
-export const SearchInput = ({ onSelect, placeholder }) => {
+export const SearchInput = ({ onSelect, placeholder, onSearchFocus }) => {
   const [searchString, setSearchString] = useState('');
   const [isLoadingMobile, setIsLoadingMobile] = useState(false);
   const [selectedSearch, setSelectedSearch] = useState('');
@@ -128,7 +128,7 @@ export const SearchInput = ({ onSelect, placeholder }) => {
               paddingLeft: '35px',
               paddingRight: '55px',
             }}
-            placeholder={placeholder ?? 'Search'}
+            placeholder={placeholder ?? 'Search...'}
             onChangeText={(text) => {
               setSearchString(text);
             }}
@@ -225,6 +225,7 @@ export const SearchInput = ({ onSelect, placeholder }) => {
         placeholder="Search"
         width="100%"
         borderRadius="4"
+        onFocus={onSearchFocus}
         py="3"
         px="1"
         value={searchString}

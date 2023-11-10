@@ -1,5 +1,5 @@
-import React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, SafeAreaView, View, StyleSheet } from 'react-native';
 import { VStack, Box, ScrollView } from 'native-base';
 import { theme } from '../../theme';
 import useTheme from '../../hooks/useTheme';
@@ -9,8 +9,22 @@ import FeedPreview from '../../components/dashboard/FeedPreview';
 import Section from '../../components/dashboard/Section';
 import SectionHeader from '../../components/dashboard/SectionHeader';
 import useCustomStyles from '~/hooks/useCustomStyles';
+import { SearchComponent } from '../../components/SearchComponent';
+
 const Dashboard = () => {
   const styles = useCustomStyles(loadStyles);
+  const [searchFocus, setSearchFocus] = useState(false);
+  const [searchText, setSearchText] = useState('');
+
+  const handleSearch = (searchText) => {
+    console.log('Search Query:', searchText);
+    // Update the state or perform any other actions based on the search query
+    setSearchText(searchText);
+  };
+
+  const onSearchFocus = () => {
+    setSearchFocus(!searchFocus);
+  };
 
   return (
     <>
@@ -22,7 +36,22 @@ const Dashboard = () => {
           ]}
         >
           <Box>
-            <HeroBanner style={styles.cardContainer} />
+            {searchFocus && Platform.OS !== 'web' && (
+              <View style={styles.searchView}>
+                <SearchComponent
+                  focused={searchFocus}
+                  onSearchFocus={onSearchFocus}
+                  onSearch={handleSearch}
+                  searchText={searchText}
+                  onChangeText={setSearchText}
+                />
+              </View>
+            )}
+            <HeroBanner
+              style={styles.cardContainer}
+              onSearchFocus={onSearchFocus}
+              onSearch={handleSearch}
+            />
             <Section>
               <SectionHeader
                 iconName="add-circle-outline"
@@ -61,6 +90,15 @@ const loadStyles = (theme) => {
       justifyContent: 'space-between',
       marginBottom: 20,
       width: '100%',
+    },
+    searchView: {
+      flex: 1,
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      zIndex: 1,
     },
   };
 };

@@ -42,7 +42,7 @@
     "format:all": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "fix": "manypkg fix",
     "preinstall": "npx only-allow yarn",
-    "postinstall": "yarn build",
+    "postinstall": "yarn patch-package && yarn build",
     "build": "yarn workspaces foreach --all run build",
     "upgrade:tamagui": "yarn up '*tamagui*'@latest '@tamagui/*'@latest react-native-web-lite@latest",
     "upgrade:tamagui:canary": "yarn up '*tamagui*'@canary '@tamagui/*'@canary react-native-web-lite@canary",
